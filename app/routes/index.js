@@ -20,7 +20,12 @@ module.exports = function (app, passport) {
 	app.route('/all')
 		.get(isLoggedIn, function(req, res){
 			res.sendFile(path + '/public/allBooks.html');
-		})
+		});
+		
+	app.route('/my')
+		.get(isLoggedIn, function(req, res){
+			res.sendFile(path + '/public/myBooks.html');
+		});
 
 	app.route('/login')
 		.get(function (req, res) {
