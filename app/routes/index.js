@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
 	}
 
 	app.route('/')
-		.get(function (req, res) {
+		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
 
