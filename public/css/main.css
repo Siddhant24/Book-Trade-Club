@@ -218,3 +218,8 @@ span {
 .request-buttons{
   	text-align: center;
 }
+
+.book-item{
+	display: inline-block;
+	margin: 10px;
+}

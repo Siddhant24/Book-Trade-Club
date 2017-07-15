@@ -27,13 +27,13 @@
 			</div><br />
 	        <div class="row request-buttons">
 	            <div class="col-sm-4">
-	                <button class="btn btn-primary"><h4>My requests</h4></button>
+	                <button class="btn btn-primary" id="my-requests"><h4>My requests</h4></button>
 	            </div>
 	            <div class="col-sm-4">
-	                <button class="btn btn-primary"><h4>Requests for my books</h4></button>
+	                <button class="btn btn-primary" id="requests-for-me"><h4>Requests for my books</h4></button>
 	            </div>
 	            <div class="col-sm-4">
-	                <button class="btn btn-primary"><h4>Traded books</h4></button>
+	                <button class="btn btn-primary" id="traded"><h4>Traded books</h4></button>
 	            </div>
 	        </div><br /><br />
 	        <div class="request-text"></div>
@@ -63,6 +63,7 @@
 	    
 	    <script type="text/javascript" src="common/ajax-functions.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
+		<script type="text/javascript" src="controllers/onLoadController.myBooks.js"></script>
 	</body>
 	
 </html>
