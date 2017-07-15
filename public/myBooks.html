@@ -10,7 +10,7 @@
 	</head>
 
 	<header>
-		<button class="btn-link"><i class="fa fa-home" style="font-size:48px"></i>Home</button>
+		<button class="btn-link home"><i class="fa fa-home" style="font-size:48px"></i>Home</button>
 		<div class="user-info">
 			<p>Welcome, <span id="display-name"></span>!</p>
 			<a class="menu" href="/profile">Profile</a>
@@ -43,11 +43,11 @@
 	            </h1>
 	        </div>
 	        <div class="add-book-form text-center">
-	            <form class="form-inline">
+	            <form class="form-inline" method="post">
   					<div class="form-group">
     					<label class="control-label col-sm-2" for="add-book"><strong>Add Book:</strong></label>
     					<div class="col-sm-10"> 
-      						<input type="text" class="form-control" id="add-book" placeholder="Enter book title">
+      						<input type="text" class="form-control" id="add-book" placeholder="Enter book title" name="title">
     					</div>
   					</div>
   					<div class="form-group"> 
