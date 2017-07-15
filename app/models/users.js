@@ -7,8 +7,16 @@ var User = new Schema({
 	github: {
 		id: String,
 		displayName: String,
-		username: String,
-      publicRepos: Number
+		username: String
+	},
+	
+	city: { 
+		type: String,
+		default: ''
+	},
+	state: { 
+		type: String,
+		default: ''
 	},
 });
 
