@@ -29,16 +29,21 @@ module.exports = {
     },
     
     allBooks: function(){
-        Book.find(function(err, docs){
-            if(err) console.error(err);
-            return docs;
-        });
+       return new Promise(function(resolve, reject){
+           Book.find(function(err, docs){
+               if(err) console.error(err);
+    //           console.log(docs);
+               resolve(docs);
+           }); 
+       });
     },
     
     myBooks: function(user_id){
-        Book.find({owner: user_id}, function(err, docs){
-            if(err) console.error(err);
-            return docs;
+        return new Promise(function(resolve, reject){
+            Book.find({owner: user_id}, function(err, docs){
+                if(err) console.error(err);
+                return docs;
+            });
         });
     },
     
@@ -47,5 +52,24 @@ module.exports = {
             if(err) console.error(err);
             console.log(doc);
         });
-    }
+    },
+    
+    addRequest: function(book_id, requester_id){
+        //console.log(book_id);
+        //console.log(requester_id);
+        var newStatus = {code: 'requested', name: requester_id};
+        Book.findOneAndUpdate({_id: book_id}, { $set: {status: newStatus}}, {new: true}, function(err, doc){
+            if(err) console.error(err);
+            console.log(doc);
+        });
+    },
+    
+    myRequests: function(user_id){
+        return new Promise(function(resolve, reject){
+           Book.find({status: {code: 'requested', name: user_id}}, function(docs){
+              resolve(docs); 
+           }); 
+        });
+    },
+    
 };
