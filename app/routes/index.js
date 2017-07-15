@@ -1,6 +1,7 @@
 'use strict';
 
 var path = process.cwd();
+var api = require('../api/api.js');
 
 module.exports = function (app, passport) {
 
@@ -25,6 +26,40 @@ module.exports = function (app, passport) {
 	app.route('/my')
 		.get(isLoggedIn, function(req, res){
 			res.sendFile(path + '/public/myBooks.html');
+		})
+		.post(isLoggedIn, function(req, res){
+//			console.log('body...' + req.body.title);
+//			console.log('user...' + req.user);
+			api.addBook(req.body.title, req.user._id);
+			res.send("done");
+		});
+		
+	app.route('/allBooks')
+		.get(isLoggedIn, function(req, res){
+			api.allBooks().then(function(docs){
+				console.log(docs);
+				res.send(docs);
+			});
+		});
+		
+	app.route('/myBooks')
+		.get(isLoggedIn, function(req, res){
+			var myData = {};
+			api.myBooks(req.user._id).then(function(docs){
+				myData.books = docs;
+				api.myRequests(req.user._id).then(function(requests){
+					myData.myRequests = requests;
+					console.log(myData);
+					res.send(myData);
+				});	
+			});
+		});
+		
+	app.route('/trade')
+		.get(isLoggedIn, function(req, res){
+			console.log(req.query);
+			api.addRequest(req.query.id, req.user._id);
+			res.send("successfully requested");
 		});
 
 	app.route('/login')
