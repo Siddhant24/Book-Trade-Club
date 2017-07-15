@@ -8,8 +8,8 @@ var Book = new Schema({
    owner: { type: Schema.Types.ObjectId, ref: 'User' },
    cover: String,
    status: {
-       code: { type: String, default: '' },
-       name: { type: Schema.Types.ObjectId, ref: 'User', default: 0}
+       code: { type: String, default: 'available' },
+       name: { type: Schema.Types.ObjectId, ref: 'User', default: '596a1797fb4f860a72d9fede'}
    }
 });
 
