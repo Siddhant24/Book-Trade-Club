@@ -12,26 +12,26 @@
 	<body>
 		<div class="container">
 			<div class="github-profile">
-				<img src="/public/img/gh-mark-32px.png" alt="github logo" />
-				<p><span>ID: </span><span id="profile-id" class="profile-value"></span></p>
 				<p><span>Username: </span><span id="profile-username" class="profile-value"></span></p>
 				<p><span>Display Name: </span><span id="display-name" class="profile-value"></span></p>
+				<p><span>City: </span><span id="city-name" class="profile-value"></span></p>
+				<p><span>State: </span><span id="state-name" class="profile-value"></span></p>
 				<a class="menu" href="/">Home</a>
 				<p id="menu-divide">|</p>
 				<a class="menu" href="/logout">Logout</a>
 			</div>
 			<div class="details">
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="post">
   					<div class="form-group">
     					<label class="control-label col-sm-2" for="city">City:</label>
     					<div class="col-sm-10">
-      						<input type="text" class="form-control" id="city" placeholder="Enter your city">
+      						<input type="text" class="form-control" id="city" placeholder="Enter your city" name="city">
     					</div>
   					</div>
   					<div class="form-group">
     					<label class="control-label col-sm-2" for="state">State:</label>
     					<div class="col-sm-10"> 
-      						<input type="text" class="form-control" id="state" placeholder="Enter your state">
+      						<input type="text" class="form-control" id="state" placeholder="Enter your state" name="state">
     					</div>
   					</div>
   					<div class="form-group"> 
@@ -46,5 +46,5 @@
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
 	</body>
-
+	<footer class="text-center"><a href="https://github.com/Siddhant24" target="_blank">&copy; Siddhant Bhakar</a></footer>
 </html>
