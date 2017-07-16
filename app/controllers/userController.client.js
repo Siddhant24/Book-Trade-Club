@@ -2,10 +2,10 @@
 
 (function () {
 
-   var profileId = document.querySelector('#profile-id') || null;
    var profileUsername = document.querySelector('#profile-username') || null;
-   var profileRepos = document.querySelector('#profile-repos') || null;
    var displayName = document.querySelector('#display-name');
+   var cityName = document.querySelector('#city-name') || null;
+   var stateName = document.querySelector('#state-name') || null;
    var apiUrl = appUrl + '/api/:id';
 
    function updateHtmlElement (data, element, userProperty) {
@@ -16,21 +16,21 @@
       var userObject = JSON.parse(data);
 
       if (userObject.displayName !== null) {
-         updateHtmlElement(userObject, displayName, 'displayName');
+         updateHtmlElement(userObject.github, displayName, 'displayName');
       } else {
-         updateHtmlElement(userObject, displayName, 'username');
-      }
-
-      if (profileId !== null) {
-         updateHtmlElement(userObject, profileId, 'id');   
+         updateHtmlElement(userObject.github, displayName, 'username');
       }
 
       if (profileUsername !== null) {
-         updateHtmlElement(userObject, profileUsername, 'username');   
+         updateHtmlElement(userObject.github, profileUsername, 'username');   
       }
-
-      if (profileRepos !== null) {
-         updateHtmlElement(userObject, profileRepos, 'publicRepos');   
+      
+      if (cityName !== null) {
+         updateHtmlElement(userObject, cityName, 'city');
+      }
+      
+      if (stateName !== null) {
+         updateHtmlElement(userObject, stateName, 'state');
       }
 
    }));
