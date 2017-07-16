@@ -223,3 +223,19 @@ span {
 	display: inline-block;
 	margin: 10px;
 }
+
+.request-text{
+	margin-bottom: 50px;
+}
+
+.trade-success{
+	position: relative;
+	right: 50px;
+}
+
+footer a{
+	position: absolute;
+	bottom: 0px;
+	color: silver;
+	font-size: 20px;
+}
