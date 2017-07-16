@@ -32,6 +32,5 @@
       if (stateName !== null) {
          updateHtmlElement(userObject, stateName, 'state');
       }
-
    }));
 })();
