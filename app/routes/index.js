@@ -31,7 +31,7 @@ module.exports = function (app, passport) {
 //			console.log('body...' + req.body.title);
 //			console.log('user...' + req.user);
 			api.addBook(req.body.title, req.user._id);
-			res.send("done");
+			res.redirect('/my');
 		});
 		
 	app.route('/allBooks')
@@ -44,15 +44,22 @@ module.exports = function (app, passport) {
 		
 	app.route('/myBooks')
 		.get(isLoggedIn, function(req, res){
+			console.log('my books requested...');
 			var myData = {};
 			api.myBooks(req.user._id).then(function(docs){
+				console.log('my books received...');
 				myData.books = docs;
 				api.myRequests(req.user._id).then(function(requests){
+					console.log('my requests recevied...');
 					myData.myRequests = requests;
-					console.log(myData);
+				//	console.log(myData);
 					res.send(myData);
 				});	
 			});
+		})
+		.post(isLoggedIn, function(req, res){
+			api.deleteBook(req.body.book_id);
+			res.send("deleted...");
 		});
 		
 	app.route('/trade')
@@ -60,6 +67,16 @@ module.exports = function (app, passport) {
 			console.log(req.query);
 			api.addRequest(req.query.id, req.user._id);
 			res.send("successfully requested");
+		})
+		.post(isLoggedIn, function(req, res){
+			api.cancelRequest(req.body.book_id);
+			res.send("cancelled request...");
+		});
+		
+	app.route('/request')
+		.post(isLoggedIn, function(req, res){
+			api.approveRequest(req.body.book_id);
+			res.send("approved request...");
 		});
 
 	app.route('/login')
@@ -76,11 +93,16 @@ module.exports = function (app, passport) {
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/profile.html');
+		})
+		.post(isLoggedIn, function (req, res) {
+			console.log(req.body);
+			api.updateProfile(req.body, req.user._id);
+			res.redirect('/profile');
 		});
 
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
+			res.json(req.user);
 		});
 
 	app.route('/auth/github')
