@@ -42,7 +42,8 @@ module.exports = {
         return new Promise(function(resolve, reject){
             Book.find({owner: user_id}, function(err, docs){
                 if(err) console.error(err);
-                return docs;
+             //   console.log(docs);
+                resolve(docs);
             });
         });
     },
@@ -65,11 +66,38 @@ module.exports = {
     },
     
     myRequests: function(user_id){
+        console.log(user_id + ' id');
         return new Promise(function(resolve, reject){
-           Book.find({status: {code: 'requested', name: user_id}}, function(docs){
-              resolve(docs); 
+           Book.find({"status.code": "requested",
+               "status.name": user_id
+           }, function(err, docs){
+               if(err) console.error(err);
+               console.log(docs);
+               resolve(docs); 
            }); 
         });
     },
+    
+    cancelRequest: function(book_id){
+        var newStatus = {code: 'available', name: '596a1797fb4f860a72d9fede'};
+        Book.findOneAndUpdate({_id: book_id}, {$set: {status: newStatus}}, {new: true}, function(err, doc){
+            if(err) console.error(err);
+            console.log(doc);
+        });
+    },
+    
+    approveRequest: function(book_id){
+        Book.findOneAndUpdate({_id: book_id}, {"status.code": "traded"}, {new: true}, function(err, doc){
+            if(err) console.error(err);
+            console.log(doc);
+        });
+    },
+    
+    updateProfile: function(data, user_id){
+        User.findOneAndUpdate({_id: user_id}, {city: data.city, state: data.state}, {new: true}, function(err, doc){
+            if(err) console.error(err);
+           console.log(doc); 
+        });
+    }
     
 };
