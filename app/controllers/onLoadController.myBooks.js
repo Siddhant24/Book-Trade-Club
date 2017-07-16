@@ -6,7 +6,6 @@ var bookList = document.querySelector('.book-list');
 function getMyBooks(){
     return new Promise(function(resolve, reject){
         ajaxFunctions.ajaxRequest('GET', appUrl + '/myBooks', function(data){
-            console.log("data received");
             resolve(JSON.parse(data));
         });
     });
@@ -14,21 +13,18 @@ function getMyBooks(){
 
 function removeBook(e){
     ajaxFunctions.ajaxPostRequest({book_id: e.id}, appUrl + '/myBooks', function(msg){
-        console.log(msg);
         window.location.reload(true);
     });
 }
 
 function approveRequest(e){
     ajaxFunctions.ajaxPostRequest({book_id: e.id.slice(1)}, appUrl + '/request', function(msg){
-        console.log(msg);
         window.location.reload(true);
     });
 }
 
 function cancelRequest(e){
     ajaxFunctions.ajaxPostRequest({book_id: e.id.slice(1)}, appUrl + '/trade', function(msg){
-        console.log(msg);
         window.location.reload(true);
     });
 }
@@ -38,7 +34,6 @@ function cancelRequest(e){
     
     ajaxFunctions.ready(function(){
         getMyBooks().then(function(data){
-            console.log(data); 
             return data;
         }).then(function(data){
             

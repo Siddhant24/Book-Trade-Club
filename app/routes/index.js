@@ -28,8 +28,6 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/myBooks.html');
 		})
 		.post(isLoggedIn, function(req, res){
-//			console.log('body...' + req.body.title);
-//			console.log('user...' + req.user);
 			api.addBook(req.body.title, req.user._id);
 			res.redirect('/my');
 		});
@@ -37,22 +35,17 @@ module.exports = function (app, passport) {
 	app.route('/allBooks')
 		.get(isLoggedIn, function(req, res){
 			api.allBooks().then(function(docs){
-				console.log(docs);
 				res.send(docs);
 			});
 		});
 		
 	app.route('/myBooks')
 		.get(isLoggedIn, function(req, res){
-			console.log('my books requested...');
 			var myData = {};
 			api.myBooks(req.user._id).then(function(docs){
-				console.log('my books received...');
 				myData.books = docs;
 				api.myRequests(req.user._id).then(function(requests){
-					console.log('my requests recevied...');
 					myData.myRequests = requests;
-				//	console.log(myData);
 					res.send(myData);
 				});	
 			});
@@ -64,7 +57,6 @@ module.exports = function (app, passport) {
 		
 	app.route('/trade')
 		.get(isLoggedIn, function(req, res){
-			console.log(req.query);
 			api.addRequest(req.query.id, req.user._id);
 			res.send("successfully requested");
 		})
@@ -95,7 +87,6 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/profile.html');
 		})
 		.post(isLoggedIn, function (req, res) {
-			console.log(req.body);
 			api.updateProfile(req.body, req.user._id);
 			res.redirect('/profile');
 		});

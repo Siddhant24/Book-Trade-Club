@@ -9,7 +9,6 @@
         var allBooksPromise = new Promise(function(resolve, reject){
         
             ajaxFunctions.ajaxRequest('GET', appUrl + '/allBooks', function(data){
-       //       console.log(data);
               resolve(JSON.parse(data));
             });
         });
@@ -30,9 +29,8 @@
             });
         }).then(function(){
             document.querySelectorAll('.trade').forEach(btn => btn.addEventListener('click', function(e){
-                console.log(appUrl + '/trade?' + 'id=' + e.target.id);
                 ajaxFunctions.ajaxRequest('GET', appUrl + '/trade?' + 'id=' + e.target.id, function(msg){
-                    console.log(msg);
+                    window.location.reload(true);
                 });
             }));
         });
